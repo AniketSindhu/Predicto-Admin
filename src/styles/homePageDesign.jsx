@@ -11,28 +11,37 @@ const useStyles = makeStyles((theme) => ({
   ConnectWallet: {
     color: "#F48FB1",
     borderColor: "#F48FB1",
+    margin: "0px 8px 0px 8px",
   },
   DisconnectWallet: {
     color: "white",
     borderColor: "#F48FB1",
+    margin: "0px 8px 0px 8px",
+  },
+  createMarket: {
+    color: "#9282EC",
+    borderColor: "#9282EC",
   },
   balanceText: {
     color: "#9282EC",
     fontSize: "12px",
     fontWeight: "normal",
-    margin: "0px 8px 0px 0px"
+    margin: "0px 8px 0px 0px",
   },
-  addressText:{
+  addressText: {
     fontSize: "12px",
     fontWeight: "100",
     color: "#CC56CC",
-    margin: "0px 0px 0px 5px"
+    margin: "0px 0px 0px 5px",
   },
-  buttonRow:{
+  buttonRow: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-   
+  },
+  appbarRight:{
+    display: "flex",
+    flexDirection: "row",
   }
 }));
 

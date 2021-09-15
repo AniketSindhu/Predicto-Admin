@@ -1,10 +1,12 @@
 import "./App.css";
 import useStyles from "./styles/homePageDesign";
-import { AppBar, Toolbar, Link, Typography } from "@material-ui/core";
+import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 import ConnectButton from "./components/ConnectButton";
 import React, { useState } from "react";
 import { TezosToolkit } from "@taquito/taquito";
 import DisconnectButton from "./components/DisconnectButton";
+import { Switch, Route, Link } from "react-router-dom";
+import CreateMarket from "./components/CreateMarket";
 
 function App() {
   const classes = useStyles();
@@ -30,30 +32,50 @@ function App() {
               <b>Predicto Admin</b>
             </Typography>
           </Link>
-          {userAddress === "" && !beaconConnection ? (
-            <ConnectButton
-              Tezos={Tezos}
-              setWallet={setWallet}
-              setUserAddress={setUserAddress}
-              setUserBalance={setUserBalance}
-              setBeaconConnection={setBeaconConnection}
-              wallet={wallet}
-            />
-          ) : (
-            <DisconnectButton
-              wallet={wallet}
-              setUserAddress={setUserAddress}
-              setUserBalance={setUserBalance}
-              setWallet={setWallet}
-              setTezos={setTezos}
-              setBeaconConnection={setBeaconConnection}
-              userBalance={userBalance}
-              userAddress={userAddress}
-            />
-          )}
+          <div className={classes.appbarRight}>
+            <Button
+              variant="outlined"
+              className={classes.createMarket}
+              onClick={() => {
+                this.props.history.push("/createMarket");
+              }}
+            >
+              Create Market
+            </Button>
+            {userAddress === "" && !beaconConnection ? (
+              <ConnectButton
+                Tezos={Tezos}
+                setWallet={setWallet}
+                setUserAddress={setUserAddress}
+                setUserBalance={setUserBalance}
+                setBeaconConnection={setBeaconConnection}
+                wallet={wallet}
+              />
+            ) : (
+              <DisconnectButton
+                wallet={wallet}
+                setUserAddress={setUserAddress}
+                setUserBalance={setUserBalance}
+                setWallet={setWallet}
+                setTezos={setTezos}
+                setBeaconConnection={setBeaconConnection}
+                userBalance={userBalance}
+                userAddress={userAddress}
+              />
+            )}
+          </div>
         </Toolbar>
       </AppBar>
-      <div className="App"></div>
+      <Switch>
+        <Route exact path="/">
+          <div className="App"></div>
+        </Route>
+        <Route exact path="/createMarket">
+          <div className="App">
+            <CreateMarket />
+          </div>
+        </Route>
+      </Switch>
     </div>
   );
 }
