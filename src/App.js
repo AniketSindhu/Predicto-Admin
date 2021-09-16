@@ -7,6 +7,7 @@ import { TezosToolkit } from "@taquito/taquito";
 import DisconnectButton from "./components/DisconnectButton";
 import { Switch, Route, Link } from "react-router-dom";
 import CreateMarket from "./components/CreateMarket";
+import { useHistory } from "react-router-dom";
 
 function App() {
   const classes = useStyles();
@@ -17,6 +18,7 @@ function App() {
   const [userAddress, setUserAddress] = useState("");
   const [userBalance, setUserBalance] = useState(0);
   const [beaconConnection, setBeaconConnection] = useState(false);
+  let history = useHistory();
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -37,7 +39,7 @@ function App() {
               variant="outlined"
               className={classes.createMarket}
               onClick={() => {
-                this.props.history.push("/createMarket");
+                history.push("/createMarket");
               }}
             >
               Create Market
