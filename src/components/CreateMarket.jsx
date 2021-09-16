@@ -1,6 +1,12 @@
 import React from "react";
 import useStyles from "../styles/createMarketDesign";
-import { Paper, TextField, Typography } from "@material-ui/core";
+import {
+  Paper,
+  TextField,
+  Typography,
+  Button,
+  InputAdornment,
+} from "@material-ui/core";
 
 function CreateMarket() {
   const classes = useStyles();
@@ -50,12 +56,44 @@ function CreateMarket() {
                 margin: "10px 40px 10px 40px",
                 cursor: "pointer",
                 color: "#6A676F",
-                fontWeight: "600"
+                fontWeight: "600",
               }}
             >
               Select Closing Date
             </Typography>
           </Paper>
+          <div style={{ height: "20px" }}></div>
+          <h5
+            style={{
+              color: "white",
+              margin: "0px 0px 8px 0px",
+              fontSize: "13px",
+            }}
+          >
+            Initial Liquidity (Tez)
+          </h5>
+          <TextField
+            id="outlined"
+            style={{ width: "55%" }}
+            placeholder="Initial liquidity for the market in tez"
+            variant="outlined"
+            InputProps={{
+              className: classes.placeholder,
+              classes: {
+                notchedOutline: classes.outline,
+              },
+              endAdornment: (
+                <InputAdornment
+                  position="end"
+                >
+                  <Typography style={{color:"white"}}>Tez</Typography>
+                </InputAdornment>
+              ),
+            }}
+            InputLabelProps={{
+              style: { color: "#ffffff", textOverflow: "ellipsis" },
+            }}
+          />
           <div style={{ height: "20px" }}></div>
           <h5
             style={{
@@ -81,6 +119,17 @@ function CreateMarket() {
               style: { color: "#ffffff", textOverflow: "ellipsis" },
             }}
           />
+          <Button
+            variant="contained"
+            color="primary"
+            style={{
+              margin: "20px 0px 20px 0px",
+              width: "100%",
+              backgroundColor: "#F48FB1",
+            }}
+          >
+            Approve Market
+          </Button>
         </form>
       </Paper>
     </div>

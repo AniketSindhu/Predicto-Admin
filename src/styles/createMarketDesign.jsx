@@ -3,11 +3,12 @@ import { makeStyles } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   paper: {
     margin: "30px 0px 0px 0px",
-    height: "500px",
     width: "60%",
     border: "1px solid #9282EC",
     backgroundColor: "transparent",
     padding: "0px 20px 0px 20px",
+    display: "flex",
+    flexDirection: "column",
   },
   CreateMarket: {
     display: "flex",
@@ -40,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #3F51B5",
     }
   },
+  approve:{
+    flex:"1",
+    alignContent:"end"
+  }
 }));
 
 export default useStyles;
