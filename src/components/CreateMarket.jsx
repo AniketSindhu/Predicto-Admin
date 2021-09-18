@@ -9,18 +9,28 @@ import {
 } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function CreateMarket() {
+function CreateMarket(props) {
   const classes = useStyles();
   const [startDate, setStartDate] = useState(null);
   const [question, setQuestion] = useState("");
-  const [oracle, setOracle] = useState("");
+  const [oracle, setOracle] = useState(props.address);
   const [tez, setTez] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (startDate && question && oracle && tez) {
-      console.log(startDate, question, oracle, tez);
+    if (!startDate) {
+      toast.error("Select a valid date", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
   };
 
@@ -39,6 +49,7 @@ function CreateMarket() {
             Market Question
           </h5>
           <TextField
+            required
             id="outlined"
             placeholder="What would you like to see this market predict?"
             fullWidth
@@ -87,7 +98,6 @@ function CreateMarket() {
             }
             withPortal
           />
-
           <div style={{ height: "20px" }}></div>
           <h5
             style={{
@@ -100,6 +110,16 @@ function CreateMarket() {
           </h5>
           <TextField
             id="outlined"
+            type="number"
+            required
+            error={tez ? (parseFloat(tez) >= 1.0 ? false : true) : false}
+            helperText={
+              tez
+                ? parseFloat(tez) >= 1.0 && parseFloat(tez) <= ((props.balance / 1000000).toFixed(3))
+                  ? ""
+                  : `Must be greater than 1.0 Tez and less than ${(props.balance / 1000000).toFixed(3)} Tez`
+                : ""
+            }
             style={{ width: "55%" }}
             placeholder="Initial liquidity for the market in tez"
             variant="outlined"
@@ -131,9 +151,11 @@ function CreateMarket() {
           </h5>
           <TextField
             id="outlined"
+            required
             placeholder="Enter the address that will report the result of this market"
             fullWidth
             variant="outlined"
+            defaultValue={oracle}
             onChange={(e) => setOracle(e.target.value)}
             InputProps={{
               className: classes.placeholder,
@@ -159,6 +181,7 @@ function CreateMarket() {
           </Button>
         </form>
       </Paper>
+      <ToastContainer />
     </div>
   );
 }

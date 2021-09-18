@@ -74,7 +74,7 @@ function App() {
         </Route>
         <Route exact path="/createMarket">
           <div className="App">
-            <CreateMarket />
+            <CreateMarket balance={userBalance} address={userAddress}/>
           </div>
         </Route>
       </Switch>
