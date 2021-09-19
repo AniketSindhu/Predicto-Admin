@@ -112,12 +112,22 @@ function CreateMarket(props) {
             id="outlined"
             type="number"
             required
-            error={tez ? (parseFloat(tez) >= 1.0 ? false : true) : false}
+            error={
+              tez
+                ? parseFloat(tez) >= 1.0 &&
+                  parseFloat(tez) <= (props.balance / 1000000).toFixed(3)
+                  ? false
+                  : true
+                : false
+            }
             helperText={
               tez
-                ? parseFloat(tez) >= 1.0 && parseFloat(tez) <= ((props.balance / 1000000).toFixed(3))
+                ? parseFloat(tez) >= 1.0 &&
+                  parseFloat(tez) <= (props.balance / 1000000).toFixed(3)
                   ? ""
-                  : `Must be greater than 1.0 Tez and less than ${(props.balance / 1000000).toFixed(3)} Tez`
+                  : `Must be greater than 1.0 Tez and less than ${(
+                      props.balance / 1000000
+                    ).toFixed(3)} Tez`
                 : ""
             }
             style={{ width: "55%" }}
