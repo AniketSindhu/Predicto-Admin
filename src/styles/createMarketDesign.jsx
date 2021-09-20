@@ -34,17 +34,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "transparent",
     display: "flex",
     flexDirection: "column",
-    justifyContent:"center",
-    color:"white",
-    cursor:"pointer",
-    '&:hover':{
-    border: "1px solid #3F51B5",
-    }
+    justifyContent: "center",
+    color: "white",
+    cursor: "pointer",
+    "&:hover": {
+      border: "1px solid white",
+    },
   },
-  approve:{
-    flex:"1",
-    alignContent:"end"
-  }
+  approve: {
+    flex: "1",
+    alignContent: "end",
+  },
 }));
 
 export default useStyles;

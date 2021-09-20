@@ -8,6 +8,8 @@ import DisconnectButton from "./components/DisconnectButton";
 import { Switch, Route, Link } from "react-router-dom";
 import CreateMarket from "./components/CreateMarket";
 import { useHistory } from "react-router-dom";
+import { ThemeProvider } from '@material-ui/core'
+import { createTheme } from '@material-ui/core/styles'
 
 function App() {
   const classes = useStyles();
@@ -18,8 +20,16 @@ function App() {
   const [userAddress, setUserAddress] = useState("");
   const [userBalance, setUserBalance] = useState(0);
   const [beaconConnection, setBeaconConnection] = useState(false);
+  const appliedTheme = createTheme({
+    palette: {
+    type: 'dark',
+    mode:'dark'
+    },
+    })
+
   let history = useHistory();
   return (
+    <ThemeProvider theme={appliedTheme}>
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
@@ -79,6 +89,7 @@ function App() {
         </Route>
       </Switch>
     </div>
+    </ThemeProvider>
   );
 }
 
