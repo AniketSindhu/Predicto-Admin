@@ -16,16 +16,17 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QontoStepIcon } from "./stepper.jsx";
 
-function CreateMarket(props) {
+function CreateMarket({ address, Tezos, balance }) {
   const classes = useStyles();
   const [startDate, setStartDate] = useState(null);
   const [question, setQuestion] = useState("");
   const [marketDescription, setMarketDescription] = useState("");
-  const [oracle, setOracle] = useState(props.address);
+  const [oracle, setOracle] = useState(address);
   const [tez, setTez] = useState("");
   const contractJSONfile = require("../contract.json");
   const [index, setIndex] = useState(0);
   const steps = ["Deploy market contract", "Provide initial liquidity"];
+  const [contractAddress, setContactAddress] = useState("");
 
   const handleDeploy = (e) => {
     e.preventDefault();
@@ -41,13 +42,14 @@ function CreateMarket(props) {
       });
     } else if (question && oracle && marketDescription) {
       setIndex(1);
-      /*       Tezos.wallet
+      const rand = Math.floor(100000 + Math.random() * 900000);
+      Tezos.wallet
         .originate({
           code: contractJSONfile,
           storage: {
-            stored_counter: 0,
-            threshold: 1,
-            keys: ["edpkuLxx9PQD8fZ45eUzrK3BhfDZJHhBuK4Zi49DcEGANwd2rpX82t"],
+            questionId: rand.toString(),
+            oracleAddress: oracle,
+            endTime: startDate,
           },
         })
         .send()
@@ -57,10 +59,20 @@ function CreateMarket(props) {
         })
         .then((contract) => {
           console.log(`Origination completed for ${contract.address}.`);
+          setContactAddress(contract.address);
         })
-        .catch((error) =>
-          console.log(`Error: ${JSON.stringify(error, null, 2)}`)
-        ); */
+        .catch((error) => {
+          console.log(`Error: ${JSON.stringify(error, null, 2)}`);
+          toast.error("Something went wrong", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        });
     } else {
       toast.error("Enter valid info", {
         position: "top-center",
@@ -240,7 +252,7 @@ function CreateMarket(props) {
               error={
                 tez
                   ? parseFloat(tez) >= 1.0 &&
-                    parseFloat(tez) <= (props.balance / 1000000).toFixed(3)
+                    parseFloat(tez) <= (balance / 1000000).toFixed(3)
                     ? false
                     : true
                   : false
@@ -248,10 +260,10 @@ function CreateMarket(props) {
               helperText={
                 tez
                   ? parseFloat(tez) >= 1.0 &&
-                    parseFloat(tez) <= (props.balance / 1000000).toFixed(3)
+                    parseFloat(tez) <= (balance / 1000000).toFixed(3)
                     ? ""
                     : `Must be greater than 1.0 Tez and less than ${(
-                        props.balance / 1000000
+                        balance / 1000000
                       ).toFixed(3)} Tez`
                   : ""
               }
