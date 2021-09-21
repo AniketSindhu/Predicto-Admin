@@ -45,6 +45,14 @@ const useStyles = makeStyles((theme) => ({
     flex: "1",
     alignContent: "end",
   },
+  loading: {
+    display: "flex",
+    height: "100vh",
+    width: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 }));
 
 export default useStyles;
