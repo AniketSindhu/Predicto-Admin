@@ -16,6 +16,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QontoStepIcon } from "./stepper.jsx";
 import BounceLoader from "react-spinners/BounceLoader";
+import db from "../firebase";
+
 /**
  * @param {{Tezos: TezosToolkit}}
  */
@@ -65,6 +67,15 @@ function CreateMarket({ address, Tezos, balance }) {
           setContactAddress(contract.address);
           setIndex(1);
           setLoading(false);
+          db.collection("markets").doc(contract.address).set({
+            contractAddress: contract.address,
+            question: question,
+            marketDescription: marketDescription,
+            questionId: rand.toString(),
+            oracle: oracle,
+            startDate: startDate,
+            createdAt: Date.now(),
+          });
           toast.success("🦄 Contract successfully deployed", {
             position: "top-center",
             autoClose: 10000,
@@ -76,7 +87,7 @@ function CreateMarket({ address, Tezos, balance }) {
           });
         })
         .catch((error) => {
-          console.log(`Error: ${JSON.stringify(error, null, 2)}`);
+          console.log(error);
           toast.error("Something went wrong", {
             position: "top-center",
             autoClose: 10000,
@@ -100,6 +111,70 @@ function CreateMarket({ address, Tezos, balance }) {
       });
     }
   };
+  const handleLiquidity = (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setLoadingText("Providing liquidity...");
+    Tezos.wallet
+      .at(contractAddress)
+      .then((contract) =>
+        contract.methods
+          .initializeMarket([["unit"]])
+          .send({ amount: parseFloat(tez), mutez: false })
+      )
+      .then((op) => {
+        console.log(`Hash: ${op.opHash}`);
+        setLoadingText(
+          `Got the Hash: ${op.opHash},\n waiting for confirmation`
+        );
+        return op.confirmation();
+      })
+      .then((result) => {
+        console.log(result);
+        if (result.completed) {
+          setLoadingText(`Transaction correctly processed!`);
+          toast.success("🦄 Market initialized successfully", {
+            position: "top-center",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setLoading(false);
+          setLoadingText("");
+        } else {
+          console.log("An error has occurred");
+          toast.error("Something went wrong", {
+            position: "top-center",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setLoading(false);
+          setLoadingText("");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Something went wrong", {
+          position: "top-center",
+          autoClose: 10000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setLoading(false);
+        setLoadingText("");
+      });
+  };
+
   if (loading) {
     return (
       <div className={classes.loading}>
@@ -270,7 +345,7 @@ function CreateMarket({ address, Tezos, balance }) {
             </Button>
           </form>
         ) : (
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={handleLiquidity}>
             <h5
               style={{
                 color: "white",

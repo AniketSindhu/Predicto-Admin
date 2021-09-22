@@ -20,6 +20,7 @@ function App() {
   const [userAddress, setUserAddress] = useState("");
   const [userBalance, setUserBalance] = useState(0);
   const [beaconConnection, setBeaconConnection] = useState(false);
+
   const appliedTheme = createTheme({
     palette: {
       type: "dark",
