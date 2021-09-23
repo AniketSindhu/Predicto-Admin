@@ -10,6 +10,7 @@ import CreateMarket from "./components/CreateMarket";
 import { useHistory } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const classes = useStyles();
@@ -93,6 +94,7 @@ function App() {
             </div>
           </Route>
         </Switch>
+        <ToastContainer />
       </div>
     </ThemeProvider>
   );

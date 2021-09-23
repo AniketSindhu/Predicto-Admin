@@ -12,12 +12,12 @@ import {
 } from "@material-ui/core";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { QontoStepIcon } from "./stepper.jsx";
 import BounceLoader from "react-spinners/BounceLoader";
 import db from "../firebase";
-
+import { useHistory } from "react-router-dom";
 /**
  * @param {{Tezos: TezosToolkit}}
  */
@@ -34,6 +34,8 @@ function CreateMarket({ address, Tezos, balance }) {
   const [contractAddress, setContactAddress] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("");
+  const [questionId, setQuestionId] = useState("");
+  let history = useHistory();
   const handleDeploy = (e) => {
     e.preventDefault();
     if (!startDate) {
@@ -67,15 +69,6 @@ function CreateMarket({ address, Tezos, balance }) {
           setContactAddress(contract.address);
           setIndex(1);
           setLoading(false);
-          db.collection("markets").doc(contract.address).set({
-            contractAddress: contract.address,
-            question: question,
-            marketDescription: marketDescription,
-            questionId: rand.toString(),
-            oracle: oracle,
-            startDate: startDate,
-            createdAt: Date.now(),
-          });
           toast.success("🦄 Contract successfully deployed", {
             position: "top-center",
             autoClose: 10000,
@@ -85,6 +78,7 @@ function CreateMarket({ address, Tezos, balance }) {
             draggable: true,
             progress: undefined,
           });
+          setQuestionId(rand.toString());
         })
         .catch((error) => {
           console.log(error);
@@ -124,9 +118,7 @@ function CreateMarket({ address, Tezos, balance }) {
       )
       .then((op) => {
         console.log(`Hash: ${op.opHash}`);
-        setLoadingText(
-          `Got the Hash: ${op.opHash},\n waiting for confirmation`
-        );
+        setLoadingText(`Waiting for confirmation`);
         return op.confirmation();
       })
       .then((result) => {
@@ -142,6 +134,16 @@ function CreateMarket({ address, Tezos, balance }) {
             draggable: true,
             progress: undefined,
           });
+          db.collection("markets").doc(contractAddress).set({
+            contractAddress: contractAddress,
+            question: question,
+            marketDescription: marketDescription,
+            questionId: questionId.toString(),
+            oracle: oracle,
+            startDate: startDate,
+            createdAt: new Date(),
+          });
+          history.push("/");
           setLoading(false);
           setLoadingText("");
         } else {
@@ -437,7 +439,6 @@ function CreateMarket({ address, Tezos, balance }) {
           </form>
         )}
       </Paper>
-      <ToastContainer />
     </div>
   );
 }
