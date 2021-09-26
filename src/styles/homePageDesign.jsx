@@ -39,10 +39,56 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "row",
     alignItems: "center",
   },
-  appbarRight:{
+  appbarRight: {
     display: "flex",
     flexDirection: "row",
-  }
+  },
+  popularMarketText: {
+    color: "white",
+    textAlign: "left",
+    margin: "30px 0px 10px 0px",
+  },
+  markets: {
+    padding: "15px",
+    textAlign: "left",
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "transparent",
+    color: "white",
+    elevation: 8,
+    border: "2px solid #9282EC",
+    height: "165px",
+    justifyContent: "space-between",
+  },
+  marketRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "start",
+  },
+  image: {
+    borderRadius: "50%",
+    width: "35px",
+    height: "35px",
+    objectFit: "cover",
+    margin: "0px 10px 0px 0px",
+  },
+  marketBottomRow: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  marketBottomColumn: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  price: {
+    backgroundColor: "#483F5A",
+    elevation: 20,
+    textAlign: "center",
+    color: "#F48FB1",
+    padding: "8px",
+    margin: "8px 0px 0px 0px",
+  },
 }));
 
 export default useStyles;

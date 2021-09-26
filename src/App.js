@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
 import { ToastContainer } from "react-toastify";
+import Markets from "./components/Markets";
 
 function App() {
   const classes = useStyles();
@@ -82,7 +83,9 @@ function App() {
         </AppBar>
         <Switch>
           <Route exact path="/">
-            <div className="App"></div>
+            <div className="App">
+              < Markets />
+            </div>
           </Route>
           <Route exact path="/createMarket">
             <div className="App">

@@ -142,6 +142,7 @@ function CreateMarket({ address, Tezos, balance }) {
             oracle: oracle,
             startDate: startDate,
             createdAt: new Date(),
+            resolved: false,
           });
           history.push("/");
           setLoading(false);
