@@ -89,6 +89,14 @@ const useStyles = makeStyles((theme) => ({
     padding: "8px",
     margin: "8px 0px 0px 0px",
   },
+  loading: {
+    display: "flex",
+    height: "100vh",
+    width: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+  },
 }));
 
 export default useStyles;

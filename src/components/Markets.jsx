@@ -22,17 +22,33 @@ function Markets() {
       <Typography variant="h6" className={classes.popularMarketText}>
         Live Markets
       </Typography>
-      <Grid container spacing={4}>
-        {markets.length !== 0 ? (
-          markets.map((market, index) => (
+      {markets.length !== 0 ? (
+        <Grid container spacing={4}>
+          {markets.map((market, index) => (
             <Grid item xs={12} sm={6} lg={4} xl={4} key={index}>
               <Market marketData={market} />
             </Grid>
-          ))
-        ) : (
-          <div>Loading...</div>
-        )}
-      </Grid>
+          ))}
+        </Grid>
+      ) : (
+        <div>
+          <div className={classes.loading}>
+            <BounceLoader color="#9282EC" loading={true} size={100} />
+            <div style={{ height: "15px" }}></div>
+            <Typography
+              variant="subtitle2"
+              style={{
+                margin: "10px 40px 10px 40px",
+                cursor: "pointer",
+                color: "white",
+                fontWeight: "600",
+              }}
+            >
+              Loading.....
+            </Typography>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

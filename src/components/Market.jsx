@@ -35,11 +35,11 @@ function Market({ marketData }) {
             </div>
             <div className={classes.marketBottomColumn}>
               Yes
-              <Paper className={classes.price}>{`$${0.54} Tez`}</Paper>
+              <Paper className={classes.price}>{`${0.54} Tez`}</Paper>
             </div>
             <div className={classes.marketBottomColumn}>
               No
-              <Paper className={classes.price}>{`$${0.46} Tez`}</Paper>
+              <Paper className={classes.price}>{`${0.46} Tez`}</Paper>
             </div>
           </div>
         </Paper>
