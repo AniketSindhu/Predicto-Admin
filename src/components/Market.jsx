@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Paper } from "@material-ui/core";
 import useStyles from "../styles/homePageDesign.jsx";
 import { Link } from "react-router-dom";
+import axios from "axios";
 function Market({ marketData }) {
   const classes = useStyles();
+  const [marketDataContract, setMarketDataContract] = useState(null);
+
+  useEffect(() => {
+    axios
+      .get(
+        `https://api.florencenet.tzkt.io/v1/contracts/${marketData.contractAddress}/storage/`
+      )
+      .then((response) => {
+        setMarketDataContract(response.data);
+      });
+  }, [marketData.contractAddress]);
   return (
     <div
       style={{
@@ -33,14 +45,24 @@ function Market({ marketData }) {
                 .toDateString()
                 .slice(4)}`}</Paper>
             </div>
-            <div className={classes.marketBottomColumn}>
-              Yes
-              <Paper className={classes.price}>{`${0.54} Tez`}</Paper>
-            </div>
-            <div className={classes.marketBottomColumn}>
-              No
-              <Paper className={classes.price}>{`${0.46} Tez`}</Paper>
-            </div>
+            {marketDataContract ? (
+              <>
+                <div className={classes.marketBottomColumn}>
+                  Yes
+                  <Paper className={classes.price}>{`${
+                    marketDataContract.yesPrice / 1000
+                  } Tez`}</Paper>
+                </div>
+                <div className={classes.marketBottomColumn}>
+                  No
+                  <Paper className={classes.price}>{`${
+                    marketDataContract.noPrice / 1000
+                  } Tez`}</Paper>
+                </div>
+              </>
+            ) : (
+              <div>Getting Price....</div>
+            )}
           </div>
         </Paper>
       </Link>
