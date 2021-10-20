@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "site": "predicto-admin",
     "public": "build",
+    "site": "predicto-admin",
     "ignore": [
       "firebase.json",
       "**/.*",

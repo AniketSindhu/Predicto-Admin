@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
 import { Button } from "@material-ui/core";
 import useStyles from "../styles/homePageDesign";
 import { BeaconWallet } from "@taquito/beacon-wallet";

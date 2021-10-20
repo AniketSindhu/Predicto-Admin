@@ -3,6 +3,7 @@ import useStyles from "./styles/homePageDesign";
 import { AppBar, Toolbar, Typography, Button } from "@material-ui/core";
 import ConnectButton from "./components/ConnectButton";
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import { TezosToolkit } from "@taquito/taquito";
 import DisconnectButton from "./components/DisconnectButton";
 import { Switch, Route, Link } from "react-router-dom";

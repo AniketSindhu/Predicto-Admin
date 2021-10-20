@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { Paper } from "@material-ui/core";
 import useStyles from "../styles/homePageDesign.jsx";
 import { Link } from "react-router-dom";
@@ -26,7 +27,10 @@ function Market({ marketData }) {
         to={`/market/${marketData.contractAddress}`}
         style={{ textDecoration: "none" }}
       >
-        <Paper className={classes.markets}>
+        <Paper
+          className={classes.markets}
+          style={{ backgroundColor: "transparent" }}
+        >
           <div className={classes.marketRow}>
             <img
               src={

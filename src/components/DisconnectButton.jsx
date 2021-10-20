@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import { TezosToolkit } from "@taquito/taquito";
 import useStyles from "../styles/homePageDesign";
 import { Button } from "@material-ui/core";
