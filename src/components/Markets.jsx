@@ -11,7 +11,7 @@ function Markets() {
   useEffect(() => {
     console.log("Hi");
     db.collection("markets")
-      .where("resolved", "==", false)
+      .orderBy("createdAt", "desc")
       .onSnapshot((snapshot) =>
         setMarkets(snapshot.docs.map((doc) => doc.data()))
       );
@@ -20,7 +20,7 @@ function Markets() {
   return (
     <div>
       <Typography variant="h6" className={classes.popularMarketText}>
-        Live Markets
+        Markets
       </Typography>
       {markets.length !== 0 ? (
         <Grid container spacing={4}>

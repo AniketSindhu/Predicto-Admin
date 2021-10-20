@@ -55,7 +55,7 @@ function CreateMarket({ address, Tezos, balance }) {
       Tezos.wallet
         .originate({
           code: contractJSONfile,
-          init: `(Pair (Pair (Pair {} (Pair "${startDate.toISOString()}" 0)) (Pair (Pair False False) (Pair {} 0))) (Pair (Pair 0 (Pair "${oracle}" "${rand.toString()}")) (Pair (Pair 0 0) (Pair 0 0))))`,
+          init: `(Pair (Pair (Pair {} (Pair "${startDate.toISOString()}" 0)) (Pair (Pair False False) (Pair {} 0))) (Pair (Pair 0 (Pair "${oracle}" "${rand.toString()}")) (Pair (Pair True 0) (Pair 0 0))))`,
         })
         .send()
         .then((originationOp) => {

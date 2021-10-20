@@ -12,6 +12,7 @@ import { ThemeProvider } from "@material-ui/core";
 import { createTheme } from "@material-ui/core/styles";
 import { ToastContainer } from "react-toastify";
 import Markets from "./components/Markets";
+import MarketDetails from "./components/MarketDetails";
 
 function App() {
   const classes = useStyles();
@@ -22,7 +23,10 @@ function App() {
   const [userAddress, setUserAddress] = useState("");
   const [userBalance, setUserBalance] = useState(0);
   const [beaconConnection, setBeaconConnection] = useState(false);
-
+  const updateBalance = async () => {
+    const balance = await Tezos.tz.getBalance(userAddress);
+    setUserBalance(balance.toNumber());
+  };
   const appliedTheme = createTheme({
     palette: {
       type: "dark",
@@ -84,7 +88,7 @@ function App() {
         <Switch>
           <Route exact path="/">
             <div className="App">
-              < Markets />
+              <Markets />
             </div>
           </Route>
           <Route exact path="/createMarket">
@@ -96,6 +100,18 @@ function App() {
               />
             </div>
           </Route>
+          <Route
+            path="/market/:id"
+            render={({ match }) => (
+              <MarketDetails
+                address={match.params.id}
+                balance={userBalance}
+                Tezos={Tezos}
+                userAddress={userAddress}
+                updateBalance={updateBalance}
+              />
+            )}
+          ></Route>
         </Switch>
         <ToastContainer />
       </div>

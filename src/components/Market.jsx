@@ -23,7 +23,7 @@ function Market({ marketData }) {
       }}
     >
       <Link
-        to={`/market/${marketData.questionId}`}
+        to={`/market/${marketData.contractAddress}`}
         style={{ textDecoration: "none" }}
       >
         <Paper className={classes.markets}>
