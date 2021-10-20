@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import db from "../firebase";
 import useStyles from "../styles/homePageDesign.jsx";
 import Market from "./Market";
