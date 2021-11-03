@@ -25,7 +25,7 @@ function ConnectButton({
       console.log("connecting wallet", wallet);
       await wallet.requestPermissions({
         network: {
-          type: "florencenet",
+          type: "granadanet",
         },
       });
       // gets user's address
@@ -45,11 +45,11 @@ function ConnectButton({
       const options = {
         name: "Predicto Admin",
         iconUrl: "https://tezostaquito.io/img/favicon.png",
-        preferredNetwork: "florencenet",
+        preferredNetwork: "granadanet",
       };
       const wallet = new BeaconWallet(options, {
         name: "Predicto admin",
-        preferredNetwork: "florencenet",
+        preferredNetwork: "granadanet",
         disableDefaultEvents: true,
       });
       Tezos.setWalletProvider(wallet);

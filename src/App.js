@@ -18,7 +18,7 @@ import MarketDetails from "./components/MarketDetails";
 function App() {
   const classes = useStyles();
   const [Tezos, setTezos] = useState(
-    new TezosToolkit("https://florencenet.smartpy.io")
+    new TezosToolkit("https://granadanet.smartpy.io/")
   );
   const [wallet, setWallet] = useState(null);
   const [userAddress, setUserAddress] = useState("");

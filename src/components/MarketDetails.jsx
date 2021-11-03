@@ -141,7 +141,7 @@ function MarketDetails({
   const getBalances = async () => {
     axios
       .get(
-        `https://api.florencenet.tzkt.io/v1/contracts/${address}/bigmaps/balances/keys/${userAddress}`
+        `https://api.granadanet.tzkt.io/v1/contracts/${address}/bigmaps/balances/keys/${userAddress}`
       )
       .then((response) => {
         if (response.data) {
@@ -161,7 +161,7 @@ function MarketDetails({
       });
     axios
       .get(
-        `https://api.florencenet.tzkt.io/v1/contracts/${address}/bigmaps/liquidityBalance/keys/${userAddress}`
+        `https://api.granadanet.tzkt.io/v1/contracts/${address}/bigmaps/liquidityBalance/keys/${userAddress}`
       )
       .then((response) => {
         if (response.data) {
@@ -201,7 +201,7 @@ function MarketDetails({
               setLoadingText(`Getting new Market Data`);
               axios
                 .get(
-                  `https://api.florencenet.tzkt.io/v1/contracts/${address}/storage/`
+                  `https://api.granadanet.tzkt.io/v1/contracts/${address}/storage/`
                 )
                 .then((response) => {
                   toast.success("🦄 Transaction successfull", {
@@ -282,7 +282,7 @@ function MarketDetails({
               setLoadingText(`Getting new Market Data`);
               axios
                 .get(
-                  `https://api.florencenet.tzkt.io/v1/contracts/${address}/storage/`
+                  `https://api.granadanet.tzkt.io/v1/contracts/${address}/storage/`
                 )
                 .then((response) => {
                   toast.success("🦄 Transaction successfull", {
@@ -363,7 +363,7 @@ function MarketDetails({
               setLoadingText(`Getting new Market Data`);
               axios
                 .get(
-                  `https://api.florencenet.tzkt.io/v1/contracts/${address}/storage/`
+                  `https://api.granadanet.tzkt.io/v1/contracts/${address}/storage/`
                 )
                 .then((response) => {
                   toast.success("🦄 Transaction successfull", {
@@ -430,13 +430,13 @@ function MarketDetails({
         setMarket(doc.data());
       });
     axios
-      .get(`https://api.florencenet.tzkt.io/v1/contracts/${address}/storage/`)
+      .get(`https://api.granadanet.tzkt.io/v1/contracts/${address}/storage/`)
       .then((response) => {
         setMarketDataContract(response.data);
       });
     axios
       .get(
-        `https://api.florencenet.tzkt.io/v1/contracts/${address}/bigmaps/balances/keys/${userAddress}`
+        `https://api.granadanet.tzkt.io/v1/contracts/${address}/bigmaps/balances/keys/${userAddress}`
       )
       .then((response) => {
         if (response.data) {
@@ -456,7 +456,7 @@ function MarketDetails({
       });
     axios
       .get(
-        `https://api.florencenet.tzkt.io/v1/contracts/${address}/bigmaps/liquidityBalance/keys/${userAddress}`
+        `https://api.granadanet.tzkt.io/v1/contracts/${address}/bigmaps/liquidityBalance/keys/${userAddress}`
       )
       .then((response) => {
         if (response.data) {
